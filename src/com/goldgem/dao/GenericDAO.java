@@ -6,8 +6,9 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistryBuilder;
+import org.hibernate.service.ServiceRegistry;
 
 import com.goldgem.dao.interfaces.InterfaceDAO;
 import com.goldgem.dto.GenericDTO;
@@ -15,7 +16,6 @@ import com.goldgem.dto.GenericDTO;
 /**
  * Class<T> that implements an interface using the design pattern DAO (Data Access Object).
  * @author Mariana de Azevedo Santos
- *		   Contact: mariana@bsi.ufla.br
  * @param <T>
  */
 
@@ -34,9 +34,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 		this.clazz = clazz;
 		
         cfg.configure("hibernate.cfg.xml");
-        ServiceRegistryBuilder serviceRegistryBuilder = 
-        		new ServiceRegistryBuilder().applySettings(cfg.getProperties());
-        SessionFactory sessionFactory = cfg.buildSessionFactory(serviceRegistryBuilder.buildServiceRegistry());
+        ServiceRegistry serviceRegistryBuilder = 
+        		new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
+        SessionFactory sessionFactory = cfg.buildSessionFactory(serviceRegistryBuilder);
         session = sessionFactory.openSession();
 	}
 	

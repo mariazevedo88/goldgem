@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/MarianaAzevedo/workspace-mars/goldgem/lib/hibernate-core-5.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/MarianaAzevedo/workspace-mars/goldgem/lib/hibernate-entitymanager-5.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/MarianaAzevedo/workspace-mars/goldgem/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
