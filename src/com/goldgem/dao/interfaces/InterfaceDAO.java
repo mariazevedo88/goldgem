@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.goldgem.dto.GenericDTO;
 
+/**
+ * Interface that implements DAO pattern using Hibernate
+ * @author Mariana Azevedo
+ * @since
+ *
+ */
 public interface InterfaceDAO {
 
 	public GenericDTO getByID(long id);

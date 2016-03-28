@@ -15,24 +15,27 @@ import com.goldgem.dto.GenericDTO;
 
 /**
  * Class<T> that implements an interface using the design pattern DAO (Data Access Object).
- * @author Mariana de Azevedo Santos
+ * @author Mariana Azevedo
+ * @since 
  * @param <T>
  */
 
 public class GenericDAO<T> implements InterfaceDAO{
 
-	private Session session;
 	private Class<T> clazz;
-	
-	Configuration cfg = new Configuration();
+	private Session session;
+	private Configuration cfg;
 	
 	/**
 	 * Constructor that receives as parameter a class and instantiates a hibernate session
+	 * @author Mariana Azevedo
+	 * @since 
 	 * @param clazz
 	 */
 	public GenericDAO(Class<T> clazz){
 		this.clazz = clazz;
 		
+		cfg = new Configuration();
         cfg.configure("hibernate.cfg.xml");
         ServiceRegistry serviceRegistryBuilder = 
         		new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
@@ -42,6 +45,8 @@ public class GenericDAO<T> implements InterfaceDAO{
 	
 	/**
 	 * Method that return a generic DTO searched by its identification number (id)
+	 * @author Mariana Azevedo
+	 * @since
 	 * @param id
 	 * @return GenericDTO
 	 */
