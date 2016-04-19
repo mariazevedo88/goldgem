@@ -1,20 +1,24 @@
 package com.goldgem.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import com.goldgem.dao.interfaces.InterfaceJDBCDAO;
+import com.goldgem.dto.GenericDTO;
 
+/**
+ * Class<T> that implements an interface using the design pattern DAO (Data Access Object)
+ * using JDBC and SQL.
+ * @author Mariana Azevedo
+ * @since 25/03/2016
+ * @param <T>
+ */
 public class GenericJDBCDAO<T> implements InterfaceJDBCDAO {
 	
-	private Properties connectionProps;
-	private String dbms;
-	private String dbName;
-	private String serverName;
-	private String portNumber;
+	private ConnectionDAO connDao;
 	
 	/**
 	 * Constructor that receives as parameter a class and instantiates a JDBC session
@@ -25,101 +29,46 @@ public class GenericJDBCDAO<T> implements InterfaceJDBCDAO {
 	 */
 	public GenericJDBCDAO(String username, String password) {
 		super();
-	    connectionProps = new Properties();
-	    connectionProps.put("user", username);
-	    connectionProps.put("password", password);
+	    connDao = new ConnectionDAO(username, password);
 	}
 	
-	public Properties getConnectionProps() {
-		return connectionProps;
+	public ConnectionDAO getConnectionDAO() {
+		return connDao;
 	}
 
-	public void setConnectionProps(Properties connectionProps) {
-		this.connectionProps = connectionProps;
-	}
-
-	public String getDbms() {
-		return dbms;
-	}
-
-	public void setDbms(String dbms) {
-		this.dbms = dbms;
-	}
-
-	public String getDbName() {
-		return dbName;
-	}
-
-	public void setDbName(String dbName) {
-		this.dbName = dbName;
-	}
-
-	public String getServerName() {
-		return serverName;
-	}
-
-	public void setServerName(String serverName) {
-		this.serverName = serverName;
-	}
-
-	public String getPortNumber() {
-		return portNumber;
-	}
-
-	public void setPortNumber(String portNumber) {
-		this.portNumber = portNumber;
-	}
-
-	/**
-	 * Method to create a SQL connection
-	 * @author Mariana Azevedo
-	 * @since 25/03/2016
-	 * @param
-	 * @returns Connection
-	 * @throws SQLException
-	 */
-	@Override
-	public Connection createConnection() throws SQLException {
-		Connection conn = null;
-	    if (getDbms().equals("mysql")) {
-	        conn = DriverManager.getConnection("jdbc:" + getDbms() + "://" + getServerName() + ":" + getPortNumber() + "/", connectionProps);
-	    }else if (getDbms().equals("postgreSQL")){
-	    	conn = DriverManager.getConnection("jdbc:" + getDbms() + "://" + getServerName() + ":" + getPortNumber() + "/", connectionProps);
-	    }else if (getDbms().equals("derby")) {
-	        conn = DriverManager.getConnection("jdbc:" + getDbms() + ":" + getDbName() + ";create=true", connectionProps);
-	    }
-	    System.out.println("Connected to database");
-	    return conn;
+	public void setConnectionDAO(ConnectionDAO connDao) {
+		this.connDao = connDao;
 	}
 
 	@Override
-	public GenericJDBCDAO getByID(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GenericDTO> getAll(String table) throws SQLException {
+		
+		Statement stmt = getConnectionDAO().getConnection().createStatement();
+		String sql = "select * from " + table;
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		if( rs.wasNull()){
+			return null;
+		}else{
+			List<GenericDTO> rsList = new ArrayList<GenericDTO>();
+			for (int i=0; i<rs.getMetaData().getColumnCount(); i++){
+				rsList.add((GenericDTO) rs.getObject(i));
+			}
+			return rsList;
+		}
 	}
 
 	@Override
-	public List<GenericJDBCDAO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public GenericDTO getByID(String table, long id) throws SQLException {
+		
+		Statement stmt = getConnectionDAO().getConnection().createStatement();
+		String sql = "select * from " + table + "where id=" + id;
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		if( rs.wasNull()){
+			return null;
+		}else{
+			return (GenericDTO) rs.getObject(0);
+		}
 	}
-
-	@Override
-	public boolean save(GenericJDBCDAO entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean update(GenericJDBCDAO entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete(GenericJDBCDAO entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

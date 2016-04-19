@@ -14,12 +14,12 @@ import com.goldgem.dao.interfaces.InterfaceDAO;
 import com.goldgem.dto.GenericDTO;
 
 /**
- * Class<T> that implements an interface using the design pattern DAO (Data Access Object).
+ * Class<T> that implements an interface using the design pattern DAO (Data Access Object)
+ * using Hibernate.
  * @author Mariana Azevedo
  * @since 
  * @param <T>
  */
-
 public class GenericDAO<T> implements InterfaceDAO{
 
 	private Class<T> clazz;
@@ -32,15 +32,23 @@ public class GenericDAO<T> implements InterfaceDAO{
 	 * @since 
 	 * @param clazz
 	 */
-	public GenericDAO(Class<T> clazz){
+	public GenericDAO(Class<T> clazz, String hibernateConfPath){
 		this.clazz = clazz;
 		
 		cfg = new Configuration();
-        cfg.configure("hibernate.cfg.xml");
-        ServiceRegistry serviceRegistryBuilder = 
-        		new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
+        cfg.configure(hibernateConfPath);
+        cfg.addAnnotatedClass(clazz);
+		ServiceRegistry serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
         SessionFactory sessionFactory = cfg.buildSessionFactory(serviceRegistryBuilder);
         session = sessionFactory.openSession();
+	}
+	
+	public Configuration getHibernateConfig(){
+		return cfg;
+	}
+	
+	public Session getSession(){
+		return session;
 	}
 	
 	/**
@@ -64,6 +72,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 
 	/**
 	 * Method that return a list of all entities on database
+	 * @author Mariana Azevedo
+	 * @since
+	 * @param
 	 * @return GenericDTO
 	 */
 	@SuppressWarnings("unchecked")
@@ -77,11 +88,13 @@ public class GenericDAO<T> implements InterfaceDAO{
 		transaction.commit();
 		
 		return criteria.list();
-		
 	}
 
 	/**
 	 * Method that saves an entity on database
+	 * @author Mariana Azevedo
+	 * @since 
+	 * @param entity
 	 * @return boolean (true or false)
 	 */
 	@Override
@@ -101,12 +114,14 @@ public class GenericDAO<T> implements InterfaceDAO{
 		}
 		
 		return true;
-		
 	}
 	
 	/**
 	 * Method that update an entity on database
-	 * @return boolean boolean (true or false)
+	 * @author Mariana Azevedo
+	 * @since 
+	 * @param entity
+	 * @return boolean (true or false)
 	 */
 	@Override
 	public boolean delete(GenericDTO entity) {
@@ -128,6 +143,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 	
 	/**
 	 * Method that deletes an entity on database
+	 * @author Mariana Azevedo
+	 * @since
+	 * @param entity
 	 * @return boolean (true or false)
 	 */
 	@Override

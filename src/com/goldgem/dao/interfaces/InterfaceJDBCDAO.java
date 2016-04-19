@@ -3,11 +3,10 @@
  */
 package com.goldgem.dao.interfaces;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.goldgem.dao.GenericJDBCDAO;
+import com.goldgem.dto.GenericDTO;
 
 /**
  * Interface that implements DAO pattern using JDBC and SQL
@@ -17,15 +16,7 @@ import com.goldgem.dao.GenericJDBCDAO;
  */
 public interface InterfaceJDBCDAO {
 	
-	public Connection createConnection() throws SQLException;
-
-	public GenericJDBCDAO getByID(long id);
+	public GenericDTO getByID(String table, long id) throws SQLException;
 	
-	public List<GenericJDBCDAO> getAll();
-	
-	public boolean save(GenericJDBCDAO entity);
-	
-	public boolean update(GenericJDBCDAO entity);
-	
-	public boolean delete(GenericJDBCDAO entity);
+	public List<GenericDTO> getAll(String table) throws SQLException;
 }
