@@ -14,7 +14,7 @@ public class DatabaseConnection {
 	
 	@Test
 	public void connectDatabase(){
-		genericJDBCDao = new ConnectionDAO("root", "@Jazz1977");
+		genericJDBCDao = new ConnectionDAO("root", "");
 		genericJDBCDao.setDbms("mysql");
 		genericJDBCDao.setDbName("library");
 		genericJDBCDao.setServerName("localhost");
