@@ -22,7 +22,7 @@ public class AuthorDAO{
 		
 		try {
 			Statement stmt = genericJDBCDao.getConnection().createStatement();
-			String sql = "insert into author (id, first_name, last_name) values (2, 'Clifford', 'Stein')";
+			String sql = "insert into author (id, first_name, last_name) values (3, 'Clifford', 'Stein')";
 			int rs = stmt.executeUpdate(sql);
 			if (rs == 1){
 				System.out.println(rs + " row have been affected.");
