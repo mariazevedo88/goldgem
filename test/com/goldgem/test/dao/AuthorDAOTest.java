@@ -7,17 +7,17 @@ import org.junit.Test;
 
 import com.goldgem.dao.ConnectionDAO;
 import com.goldgem.dao.GenericDAO;
-import com.goldgem.test.Author;
+import com.goldgem.test.AuthorTest;
 
-public class AuthorDAO{
+public class AuthorDAOTest{
 
 	@Test
 	public void addAuthorUsingJDBC(){
-		ConnectionDAO genericJDBCDao = DatabaseConnection.getGenericJDBCDAO();
+		ConnectionDAO genericJDBCDao = DatabaseConnectionTest.getGenericJDBCDAO();
 		if (genericJDBCDao == null){
-			DatabaseConnection dbConn = new DatabaseConnection();
+			DatabaseConnectionTest dbConn = new DatabaseConnectionTest();
 			dbConn.connectDatabase();
-			genericJDBCDao = DatabaseConnection.getGenericJDBCDAO();
+			genericJDBCDao = DatabaseConnectionTest.getGenericJDBCDAO();
 		}
 		
 		try {
@@ -36,17 +36,17 @@ public class AuthorDAO{
 	
 	@Test
 	public void addAuthorUsingHibernate(){
-		GenericDAO<Author> genericDAO = new GenericDAO<Author>(Author.class, "hibernate.cfg.xml");
+		GenericDAO<AuthorTest> genericDAO = new GenericDAO<AuthorTest>(AuthorTest.class, "hibernate.cfg.xml");
 		
-		Author author = new Author();
+		AuthorTest author = new AuthorTest();
 		author.setFirstName("Joseph");
 		author.setLastName("Hair Jr.");
 		
 		boolean rs = genericDAO.save(author);
 		if (rs == true){
-			System.out.println(Author.class.getName() + " added successfully.");
+			System.out.println(AuthorTest.class.getName() + " added successfully.");
 		}else{
-			System.out.println("Error on adding a(n) " + Author.class.getName());
+			System.out.println("Error on adding a(n) " + AuthorTest.class.getName());
 		}
 	}
 }

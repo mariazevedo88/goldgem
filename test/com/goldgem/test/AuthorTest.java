@@ -10,7 +10,7 @@ import com.goldgem.dto.GenericDTO;
 
 @Entity
 @Table(name="author")
-public class Author extends GenericDTO implements Serializable{
+public class AuthorTest extends GenericDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1212268556068927184L;
 

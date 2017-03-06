@@ -1,0 +1,61 @@
+<project name="goldgem" default="compile">
+	<description>goldgem build file</description>
+	
+	<property file="build.properties"/>
+	
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<mkdir  dir="${build.dir}" />
+		<mkdir  dir="${build.dir}/${classes.dir}" />
+		<mkdir  dir="${build.dir}/${classes.test.dir}" />
+	</target>
+	
+	<target name="copy-resources" depends="clean">
+		<copy todir="${build.dir}/${classes.dir}">
+			<fileset dir="${src.dir}">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<path id="classpath-compile">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<path id="classpath-compile-test">
+		<path refid="classpath-compile"/>
+		<pathelement path="${build.dir}/${classes.dir}"/>
+	</path>
+	
+	<path id="classpath-test">
+		<path refid="classpath-compile-test"/>
+		<pathelement path="${build.dir}/${classes.test.dir}"/>
+	</path>
+	
+	<target name="compile" depends="copy-resources">
+		<javac destdir="${build.dir}/${classes.dir}" srcdir="${src.dir}">
+			<classpath refid="classpath-compile" />
+		</javac>
+	</target>
+	
+	<target name="compile-test" depends="compile">
+		<javac destdir="${build.dir}/${classes.test.dir}" srcdir="${test.dir}">
+			<classpath refid="classpath-compile-test" />
+		</javac>
+	</target>
+	
+	<target name="test" depends="compile-test">
+		<junit showoutput="true" printsummary="true">
+			<formatter type="plain"/>
+			<batchtest>
+				<fileset dir="${test.dir}">
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+			<classpath refid="classpath-test" />
+		</junit>
+	</target>
+	
+</project>
