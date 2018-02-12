@@ -1,7 +1,6 @@
 package com.goldgem.test.dao;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import org.junit.Test;
 
@@ -20,12 +19,8 @@ public class DatabaseConnectionTest {
 		genericJDBCDao.setServerName("localhost");
 		genericJDBCDao.setPortNumber("3306");
 		
-		try {
-			testConnection = genericJDBCDao.createConnection();
-			genericJDBCDao.setConnection(testConnection);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		testConnection = genericJDBCDao.createConnection();
+		genericJDBCDao.setConnection(testConnection);
 	}
 	
 	public static Connection getConnectionTest(){

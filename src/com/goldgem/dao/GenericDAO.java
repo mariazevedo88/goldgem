@@ -2,6 +2,7 @@ package com.goldgem.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,6 +26,7 @@ public class GenericDAO<T> implements InterfaceDAO{
 	private Class<T> clazz;
 	private Session session;
 	private Configuration cfg;
+	private static final Logger logger = Logger.getLogger(GenericDAO.class);
 	
 	/**
 	 * Constructor that receives as parameter a class and instantiates a hibernate session
@@ -62,9 +64,7 @@ public class GenericDAO<T> implements InterfaceDAO{
 	public GenericDTO getByID(long id) {
 		
 		Transaction transaction = session.beginTransaction();
-		
 		GenericDTO genericEntity = (GenericDTO) this.session.load(clazz, id);
-		
 		transaction.commit();
 		
 		return genericEntity;
@@ -82,9 +82,7 @@ public class GenericDAO<T> implements InterfaceDAO{
 	public List<GenericDTO> getAll() {
 		
 		Transaction transaction = session.beginTransaction();
-		
 		Criteria criteria = this.session.createCriteria(clazz);
-
 		transaction.commit();
 		
 		return criteria.list();
@@ -101,15 +99,11 @@ public class GenericDAO<T> implements InterfaceDAO{
 	public boolean save(GenericDTO entity) {
 		
 		try{
-			
 			Transaction transaction = session.beginTransaction();
-			
 			session.save(entity);
-			
 			transaction.commit();
-			
 		}catch (Exception e){
-			e.printStackTrace();
+			logger.error(e);
 			return false;
 		}
 		
@@ -128,13 +122,10 @@ public class GenericDAO<T> implements InterfaceDAO{
 		
 		try{
 			Transaction transaction = session.beginTransaction();
-			
 			this.session.delete(entity);
-			
 			transaction.commit();
-			
 		}catch (Exception e){
-			e.printStackTrace();
+			logger.error(e);
 			return false;
 		}
 		
@@ -153,13 +144,10 @@ public class GenericDAO<T> implements InterfaceDAO{
 		
 		try{
 			Transaction transaction = session.beginTransaction();
-			
 			this.session.update(entity);
-			
 			transaction.commit();
-		
 		}catch (Exception e){
-			e.printStackTrace();
+			logger.error(e);
 			return false;
 		}
 		

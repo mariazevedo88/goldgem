@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.goldgem.dao.interfaces.InterfaceJDBCDAO;
 import com.goldgem.dto.GenericDTO;
 
@@ -19,6 +21,8 @@ import com.goldgem.dto.GenericDTO;
 public class GenericJDBCDAO<T> implements InterfaceJDBCDAO {
 	
 	private ConnectionDAO connDao;
+	private static final String SELECT_CLAUSE = "select * from ";
+	private static final Logger logger = Logger.getLogger(GenericJDBCDAO.class);
 	
 	/**
 	 * Constructor that receives as parameter a class and instantiates a JDBC session
@@ -41,34 +45,45 @@ public class GenericJDBCDAO<T> implements InterfaceJDBCDAO {
 	}
 
 	@Override
-	public List<GenericDTO> getAll(String table) throws SQLException {
+	public List<GenericDTO> getAll(String table){
 		
-		Statement stmt = getConnectionDAO().getConnection().createStatement();
-		String sql = "select * from " + table;
-		ResultSet rs = stmt.executeQuery(sql);
+		String sql = SELECT_CLAUSE.concat(table);
+		List<GenericDTO> rsList = new ArrayList<>();
 		
-		if( rs.wasNull()){
-			return null;
-		}else{
-			List<GenericDTO> rsList = new ArrayList<GenericDTO>();
-			for (int i=0; i<rs.getMetaData().getColumnCount(); i++){
-				rsList.add((GenericDTO) rs.getObject(i));
+		try(Statement stmt = getConnectionDAO().getConnection().createStatement();
+			ResultSet rs = stmt.executeQuery(sql);){
+			
+			if(!rs.wasNull()){
+				for (int i=0; i<rs.getMetaData().getColumnCount(); i++){
+					rsList.add((GenericDTO) rs.getObject(i));
+				}
 			}
-			return rsList;
+			
+		}catch(SQLException e){
+			logger.error(e);
 		}
+		
+		return rsList;
 	}
 
 	@Override
 	public GenericDTO getByID(String table, long id) throws SQLException {
 		
-		Statement stmt = getConnectionDAO().getConnection().createStatement();
-		String sql = "select * from " + table + "where id=" + id;
-		ResultSet rs = stmt.executeQuery(sql);
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT_CLAUSE).append(table).append("where id=").append(id);
 		
-		if( rs.wasNull()){
-			return null;
-		}else{
-			return (GenericDTO) rs.getObject(0);
+		GenericDTO genericDTO = null;
+		
+		try(Statement stmt = getConnectionDAO().getConnection().createStatement();
+			ResultSet rs = stmt.executeQuery(sql.toString());){
+			
+			if(!rs.wasNull()) genericDTO = (GenericDTO) rs.getObject(1);
+			
+		}catch(SQLException e){
+			logger.error(e);
 		}
+		
+		return genericDTO;
+		
 	}
 }
