@@ -63,12 +63,12 @@
 			            </goals>
 			        </execution>
 			        <execution>
-			            <id>report</id>
-			            <phase>prepare-package</phase>
-			            <goals>
-			                <goal>report</goal>
-			            </goals>
-			        </execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
 			        <execution>
 					    <id>jacoco-check</id>
 					    <goals>
