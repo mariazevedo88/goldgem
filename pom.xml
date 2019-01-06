@@ -5,7 +5,7 @@
   <version>1.0.0</version>
   
   <name>goldgem</name>
-  <description>Personal financial management API</description>
+  <description>Simple framework that implements some basic design patterns for Java projects using MVC</description>
   
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,6 +49,14 @@
                 	<target>1.8</target>
             	</configuration>
         	</plugin>
+        	<plugin>
+			    <groupId>org.eluder.coveralls</groupId>
+			    <artifactId>coveralls-maven-plugin</artifactId>
+			    <version>4.3.0</version>
+			    <configuration>
+			        <repoToken>KkyKrTDXdrR212rUu9JD9OzmPskzchAo4</repoToken>
+			    </configuration>
+			</plugin>
         	<plugin>
 			    <groupId>org.jacoco</groupId>
 			    <artifactId>jacoco-maven-plugin</artifactId>
