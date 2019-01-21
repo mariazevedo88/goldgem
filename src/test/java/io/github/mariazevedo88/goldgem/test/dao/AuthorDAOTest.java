@@ -10,15 +10,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 
 import io.github.mariazevedo88.goldgem.dao.ConnectionDAO;
 import io.github.mariazevedo88.goldgem.dao.GenericDAO;
+import io.github.mariazevedo88.goldgem.dto.GenericDTO;
 import io.github.mariazevedo88.goldgem.test.Author;
 
 public class AuthorDAOTest{
 	
 	private static final Logger logger = Logger.getLogger(AuthorDAOTest.class);
+	private GenericDAO<Author> genericDAO;
+	private ConnectionDAO genericJDBCDao;
 	
 	private int getSequenceNextVal(Connection conn) throws SQLException {
 		
@@ -32,15 +36,21 @@ public class AuthorDAOTest{
 		
 		return nextID;
 	}
-
-	@Test
-	public void addAuthorUsingJDBC(){
-		ConnectionDAO genericJDBCDao = DatabaseConnectionTest.getGenericJDBCDAO();
+	
+	@Before
+	public void setUp() {
+		genericDAO = new GenericDAO<Author>(Author.class, "hibernate.cfg.xml");
+		
+		genericJDBCDao = DatabaseConnectionTest.getGenericJDBCDAO();
 		if (genericJDBCDao == null){
 			DatabaseConnectionTest dbConn = new DatabaseConnectionTest();
 			dbConn.connectDatabase();
 			genericJDBCDao = DatabaseConnectionTest.getGenericJDBCDAO();
 		}
+	}
+
+	@Test
+	public void addAuthorUsingJDBC(){
 		
 		try {
 			Statement stmt = genericJDBCDao.getConnection().createStatement();
@@ -53,14 +63,12 @@ public class AuthorDAOTest{
 			assertEquals(rs + " row have been affected.", 1, rs);
 			
 		} catch (SQLException e) {
-			logger.error("Erro ao inserir novo autor.");
+			logger.error("Error inserting new author.");
 		}
 	}
 	
 	@Test
 	public void addAuthorUsingHibernate(){
-		
-		GenericDAO<Author> genericDAO = new GenericDAO<Author>(Author.class, "hibernate.cfg.xml");
 		
 		Author author = new Author();
 		author.setFirstName("Joseph");
@@ -69,6 +77,16 @@ public class AuthorDAOTest{
 		boolean rs = genericDAO.save(author);
 		String msg = rs == true ? author.getFullName() + " added successfully." : "Already exist " + author.getFullName();
 		assertTrue(msg, rs);
+	}
+	
+	@Test
+	public void getAuthorUsingHibernate(){
+		
+		Author author = new Author();
+		author.setId(1);
+		
+		GenericDTO authorToFound = genericDAO.getByID(author.getId());
+		assertEquals(author.getId(), authorToFound.getId());
 	}
 
 }

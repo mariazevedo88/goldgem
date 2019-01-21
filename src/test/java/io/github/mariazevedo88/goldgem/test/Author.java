@@ -32,4 +32,14 @@ public class Author extends GenericDTO implements Serializable{
 	public String getFullName() {
 		return this.firstName + " " + this.lastName; 
 	}
+	
+	@Override
+	public long getId() {
+		return super.getId();
+	}
+	
+	@Override
+	public void setId(long id) {
+		super.setId(id);
+	}
 }
