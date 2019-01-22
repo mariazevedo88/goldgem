@@ -42,7 +42,7 @@
 		</dependency>
    </dependencies>
 
-  <build>
+   <build>
   		<finalName>goldgem</finalName>
     	<plugins>
 			<plugin>
@@ -59,7 +59,7 @@
 			    <artifactId>coveralls-maven-plugin</artifactId>
 			    <version>4.3.0</version>
 			    <configuration>
-			        <repoToken>KkyKrTDXdrR212rUu9JD9OzmPskzchAo4</repoToken>
+			        <repoToken>${env.REPO_TOKEN}</repoToken>
 			    </configuration>
 			</plugin>
         	<plugin>
@@ -71,6 +71,7 @@
 			    </configuration>
 			    <executions>
 			        <execution>
+		                <id>prepare-agent</id>
 			            <goals>
 			                <goal>prepare-agent</goal>
 			            </goals>
