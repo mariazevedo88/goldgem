@@ -19,10 +19,10 @@
 		
 		<!-- database update, generate tables with needed -->
 		<property name="hbm2ddl.auto">update</property>
-		<property name="packagesToScan">com.goldgem.test</property>
+		<property name="packagesToScan">io.github.mariazevedo88.goldgem.test</property>
 		
 		<!-- entities --> 
-		<mapping class="com.goldgem.test.Author"/> 
+		<mapping class="io.github.mariazevedo88.goldgem.test.Author"/>
 		
 	</session-factory> 
 </hibernate-configuration>

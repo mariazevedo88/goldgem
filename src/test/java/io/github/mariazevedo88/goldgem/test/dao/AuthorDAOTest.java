@@ -4,12 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,7 +54,7 @@ public class AuthorDAOTest{
 	}
 
 	@Test
-	public void addAuthorUsingJDBC(){
+	public void addAuthorUsingJDBC() throws ParseException{
 		
 		try {
 			Statement stmt = genericJDBCDao.getConnection().createStatement();
@@ -58,12 +62,16 @@ public class AuthorDAOTest{
 			//Get next available id
 			int nextID = getSequenceNextVal(genericJDBCDao.getConnection());
 			
-			String sql = "insert into author (id, first_name, last_name) values (" + nextID + ", 'Clifford', 'Stein')";
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date dateStr = formatter.parse(DateTime.now().toString());
+			Date sqlDate = new Date(dateStr.getTime());
+			
+			String sql = "insert into author (id, first_name, last_name, created_at) values (" + nextID + ", 'Clifford', 'Stein', '" + sqlDate + "')";
 			int rs = stmt.executeUpdate(sql);
 			assertEquals(rs + " row have been affected.", 1, rs);
 			
 		} catch (SQLException e) {
-			logger.error("Error inserting new author.");
+			logger.error("Error inserting new author." + e);
 		}
 	}
 	
@@ -73,6 +81,7 @@ public class AuthorDAOTest{
 		Author author = new Author();
 		author.setFirstName("Joseph");
 		author.setLastName("Hair Jr.");
+		author.setCreatedAt(DateTime.now().toDate());
 		
 		boolean rs = genericDAO.save(author);
 		String msg = rs == true ? author.getFullName() + " added successfully." : "Already exist " + author.getFullName();
