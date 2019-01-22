@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import io.github.mariazevedo88.goldgem.dao.ConnectionDAO;
 
-public class DatabaseConnectionTest {
+public class DatabaseConnectionTest{
 
 	private static Connection testConnection;
 	private static ConnectionDAO genericJDBCDao;
