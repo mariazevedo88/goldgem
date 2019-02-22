@@ -17,8 +17,9 @@ import io.github.mariazevedo88.goldgem.dto.GenericDTO;
 /**
  * Class<T> that implements an interface using the design pattern DAO (Data Access Object)
  * using Hibernate.
+ * 
  * @author Mariana Azevedo
- * @since 
+ * @since 02/06/2013
  * @param <T>
  */
 public class GenericDAO<T> implements InterfaceDAO{
@@ -30,8 +31,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 	
 	/**
 	 * Constructor that receives as parameter a class and instantiates a hibernate session
+	 * 
 	 * @author Mariana Azevedo
-	 * @since 
+	 * @since 02/06/2013
 	 * @param clazz
 	 */
 	public GenericDAO(Class<T> clazz, String hibernateConfPath){
@@ -56,8 +58,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 	
 	/**
 	 * Method that return a generic DTO searched by its identification number (id)
+	 * 
 	 * @author Mariana Azevedo
-	 * @since
+	 * @since 02/06/2013
 	 * @param id
 	 * @return GenericDTO
 	 */
@@ -73,9 +76,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 
 	/**
 	 * Method that return a list of all entities on database
+	 * 
 	 * @author Mariana Azevedo
-	 * @since
-	 * @param
+	 * @since 02/06/2013
 	 * @return GenericDTO
 	 */
 	@SuppressWarnings("unchecked")
@@ -91,8 +94,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 
 	/**
 	 * Method that saves an entity on database
+	 * 
 	 * @author Mariana Azevedo
-	 * @since 
+	 * @since 02/06/2013
 	 * @param entity
 	 * @return boolean (true or false)
 	 */
@@ -113,8 +117,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 	
 	/**
 	 * Method that update an entity on database
+	 * 
 	 * @author Mariana Azevedo
-	 * @since 
+	 * @since 02/06/2013
 	 * @param entity
 	 * @return boolean (true or false)
 	 */
@@ -135,8 +140,9 @@ public class GenericDAO<T> implements InterfaceDAO{
 	
 	/**
 	 * Method that deletes an entity on database
+	 * 
 	 * @author Mariana Azevedo
-	 * @since
+	 * @since 02/06/2013
 	 * @param entity
 	 * @return boolean (true or false)
 	 */

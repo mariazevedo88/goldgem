@@ -7,6 +7,7 @@ import io.github.mariazevedo88.goldgem.dto.GenericDTO;
 
 /**
  * Interface that implements DAO pattern using JDBC and SQL
+ * 
  * @author Mariana Azevedo
  * @since 25/03/2016
  *

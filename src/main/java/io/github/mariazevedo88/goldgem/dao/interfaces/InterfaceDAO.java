@@ -6,9 +6,9 @@ import io.github.mariazevedo88.goldgem.dto.GenericDTO;
 
 /**
  * Interface that implements DAO pattern using Hibernate
+ * 
  * @author Mariana Azevedo
- * @since
- *
+ * @since 02/06/2013
  */
 public interface InterfaceDAO {
 

@@ -8,8 +8,9 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 /**
- * Class that implements a connection (session) with a specific database. 
- * SQL statements are executed and results are returned within the context of a connection.
+ * Class that implements a connection (session) with a specific database. SQL statements are executed 
+ * and results are returned within the context of a connection.
+ * 
  * @author Mariana Azevedo
  * @since 18/04/2016
  */
@@ -86,9 +87,9 @@ public class ConnectionDAO {
 	
 	/**
 	 * Method to create a SQL connection
+	 * 
 	 * @author Mariana Azevedo
 	 * @since 25/03/2016
-	 * @param
 	 * @returns Connection
 	 * @throws SQLException
 	 */
@@ -108,7 +109,7 @@ public class ConnectionDAO {
         	setConnection(newConnection);
         	logger.info("Connected to database");
 		} catch (SQLException e) {
-			logger.error(e);
+			logger.error("Error on database connection: " + e);
 		}
 	    
 	    return newConnection;

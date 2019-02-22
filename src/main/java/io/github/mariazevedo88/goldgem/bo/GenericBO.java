@@ -5,10 +5,10 @@ import java.util.List;
 import io.github.mariazevedo88.goldgem.dto.GenericDTO;
 
 /**
- * Class that implements an interface using the design pattern BO (Business Object). 
+ * Class that implements an interface using the design pattern BO (Business Object).
+ *  
  * @author Mariana de Azevedo Santos
- * 		   Contact: mariana@bsi.ufla.br
- *
+ * @since 02/06/2013
  */
 
 public interface GenericBO {

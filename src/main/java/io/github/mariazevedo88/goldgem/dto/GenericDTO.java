@@ -10,8 +10,9 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * Class that implements an generic entity using the design pattern DTO (Data Transfer Object).
+ * 
  * @author Mariana de Azevedo Santos
- * @since
+ * @since 02/06/2013
  */
 
 @MappedSuperclass

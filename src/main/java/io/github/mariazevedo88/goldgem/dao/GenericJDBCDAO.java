@@ -12,13 +12,14 @@ import io.github.mariazevedo88.goldgem.dao.interfaces.InterfaceJDBCDAO;
 import io.github.mariazevedo88.goldgem.dto.GenericDTO;
 
 /**
- * Class<T> that implements an interface using the design pattern DAO (Data Access Object)
+ * Class that implements an interface using the design pattern DAO (Data Access Object)
  * using JDBC and SQL.
+ * 
  * @author Mariana Azevedo
  * @since 25/03/2016
- * @param <T>
+ * 
  */
-public class GenericJDBCDAO<T> implements InterfaceJDBCDAO {
+public class GenericJDBCDAO implements InterfaceJDBCDAO {
 	
 	private ConnectionDAO connDao;
 	private static final String SELECT_CLAUSE = "select * from ";
@@ -26,6 +27,7 @@ public class GenericJDBCDAO<T> implements InterfaceJDBCDAO {
 	
 	/**
 	 * Constructor that receives as parameter a class and instantiates a JDBC session
+	 * 
 	 * @author Mariana Azevedo
 	 * @since 25/03/2016
 	 * @param username
@@ -84,6 +86,5 @@ public class GenericJDBCDAO<T> implements InterfaceJDBCDAO {
 		}
 		
 		return genericDTO;
-		
 	}
 }

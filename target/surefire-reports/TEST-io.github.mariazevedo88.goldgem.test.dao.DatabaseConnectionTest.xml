@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="io.github.mariazevedo88.goldgem.test.dao.DatabaseConnectionTest" time="0" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="io.github.mariazevedo88.goldgem.test.dao.DatabaseConnectionTest" time="0.004" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_172\jre\bin"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="C:\Users\Mariana\workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf5223174830024716830.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\Mariana\workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf5357632219662860176.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_172\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_172/bin/server;C:/Program Files/Java/jre1.8.0_172/bin;C:/Program Files/Java/jre1.8.0_172/lib/amd64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\curl\bin;C:\Program Files\Git\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\nodejs\;C:\Program Files\Amazon\AWSCLI\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Program Files\ValidatorBuddy;C:\Ruby25-x64\bin;C:\Users\Mariana\AppData\Local\Microsoft\WindowsApps;C:\Users\Mariana\AppData\Roaming\npm;C:\Program Files\MongoDB\bin;C:\Users\Mariana\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\Mariana\Documents\eclipse-jee-photon\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,5 +61,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="io.github.mariazevedo88.goldgem.test.dao.DatabaseConnectionTest" name="connectDatabase" time="0"/>
+  <testcase classname="io.github.mariazevedo88.goldgem.test.dao.DatabaseConnectionTest" name="connectDatabase" time="0.004"/>
 </testsuite>
