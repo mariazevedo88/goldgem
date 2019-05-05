@@ -99,10 +99,10 @@ public class ConnectionDAO {
         	
         	if (getDbms().equals("mysql")) {
 				newConnection = DriverManager.getConnection(JDBC + getDbms() + "://" + getServerName() + ":" + getPortNumber() 
-				+ "/" + getDbName() + "?useSSL=false", getConnectionProps());
+				+ "/" + getDbName() + "?useSSL=false&useTimezone=true&serverTimezone=America/Sao_Paulo", getConnectionProps());
         	}else if (getDbms().equals("postgreSQL")){
     	    	newConnection = DriverManager.getConnection(JDBC + getDbms() + "://" + getServerName() + ":" + getPortNumber() 
-    	    	+ "/" + getDbName() + "?useSSL=false", getConnectionProps());
+    	    	+ "/" + getDbName() + "?useSSL=false&useTimezone=true&serverTimezone=America/Sao_Paulo", getConnectionProps());
     	    }else if (getDbms().equals("derby")) {
     	        newConnection = DriverManager.getConnection(JDBC + getDbms() + ":" + getDbName() + ";create=true", getConnectionProps());
     	    }

@@ -2,8 +2,10 @@ package io.github.mariazevedo88.goldgem.dao;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -86,10 +88,13 @@ public class GenericDAO<T> implements InterfaceDAO{
 	public List<GenericDTO> getAll() {
 		
 		Transaction transaction = session.beginTransaction();
-		Criteria criteria = this.session.createCriteria(clazz);
+		// Create CriteriaBuilder
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		// Create CriteriaQuery
+		CriteriaQuery<T> criteria = builder.createQuery(clazz);
 		transaction.commit();
 		
-		return criteria.list();
+		return (List<GenericDTO>) this.session.createQuery(criteria).getResultList();
 	}
 
 	/**
