@@ -1,4 +1,14 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-/target/
+# Package Files #
+*.jar
+
+# Target folders, except jacoco reports #
+target/classes/
+target/test-classes/
+target/generated-sources/
+target/generated-test-sources/
+target/maven-archiver/
+target/maven-status/
+
