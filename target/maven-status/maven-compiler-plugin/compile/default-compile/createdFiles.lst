@@ -1,7 +1,0 @@
-io\github\mariazevedo88\goldgem\dao\GenericDAO.class
-io\github\mariazevedo88\goldgem\dao\interfaces\InterfaceJDBCDAO.class
-io\github\mariazevedo88\goldgem\bo\GenericBO.class
-io\github\mariazevedo88\goldgem\dao\interfaces\InterfaceDAO.class
-io\github\mariazevedo88\goldgem\dao\GenericJDBCDAO.class
-io\github\mariazevedo88\goldgem\dto\GenericDTO.class
-io\github\mariazevedo88\goldgem\dao\ConnectionDAO.class
