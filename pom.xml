@@ -15,28 +15,28 @@
   	</licenses>
   
   	<developers>
-		<developer>
-			<name>Mariana Azevedo</name>
-			<email>mariana@bsi.ufla.br</email>
-			<timezone>UTC-03:00</timezone>
-		</developer>
+        <developer>
+          <name>Mariana Azevedo</name>
+          <email>mariana@bsi.ufla.br</email>
+          <timezone>UTC-03:00</timezone>
+        </developer>
   	</developers>
   
   	<properties>
   	
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		
-		<hibernate.version>5.3.10.Final</hibernate.version>
-		<mysql.connector.version>8.0.17</mysql.connector.version>
-		<log4j.version>1.2.17</log4j.version>
-		<joda.time.version>2.10.1</joda.time.version>
-		<junit.jupiter.version>5.4.0</junit.jupiter.version>
-		<compiler.plugin.version>3.6.1</compiler.plugin.version>
-		<surefire.plugin.version>2.22.0</surefire.plugin.version>
-		<coveralls.version>4.3.0</coveralls.version>
-		<jacoco.version>0.7.9</jacoco.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <hibernate.version>5.4.4.Final</hibernate.version>
+        <mysql.connector.version>8.0.17</mysql.connector.version>
+        <log4j.version>1.2.17</log4j.version>
+        <joda.time.version>2.10.3</joda.time.version>
+        <junit.jupiter.version>5.4.0</junit.jupiter.version>
+        <compiler.plugin.version>3.6.1</compiler.plugin.version>
+        <surefire.plugin.version>2.22.0</surefire.plugin.version>
+        <coveralls.version>4.3.0</coveralls.version>
+        <jacoco.version>0.7.9</jacoco.version>
 		
   	</properties>
   
