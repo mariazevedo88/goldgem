@@ -2,7 +2,7 @@
   	<modelVersion>4.0.0</modelVersion>
   	<groupId>io.github.mariazevedo88</groupId>
   	<artifactId>goldgem</artifactId>
-  	<version>1.0.0</version>
+  	<version>1.0.1</version>
   
   	<name>goldgem</name>
   	<description>Simple framework that implements some basic design patterns for Java projects using MVC</description>
