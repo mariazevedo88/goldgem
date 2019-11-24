@@ -27,11 +27,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-
-        <hibernate.version>5.4.4.Final</hibernate.version>
+        <hibernate.version>5.4.8.Final</hibernate.version>
         <mysql.connector.version>8.0.18</mysql.connector.version>
         <log4j.version>1.2.17</log4j.version>
-        <joda.time.version>2.10.3</joda.time.version>
+        <joda.time.version>2.10.5</joda.time.version>
         <junit.jupiter.version>5.4.0</junit.jupiter.version>
         <compiler.plugin.version>3.6.1</compiler.plugin.version>
         <surefire.plugin.version>2.22.0</surefire.plugin.version>
