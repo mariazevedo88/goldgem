@@ -27,7 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <hibernate.version>5.4.18.Final</hibernate.version>
+        <hibernate.version>5.4.19.Final</hibernate.version>
         <mysql.connector.version>8.0.21</mysql.connector.version>
         <log4j.version>1.2.17</log4j.version>
         <joda.time.version>2.10.6</joda.time.version>
