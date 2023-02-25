@@ -6,15 +6,10 @@ Simple framework that implements some basic design patterns for Java projects us
 
 ## Dependencies
 
-- Java 8
+- Java 17
 - jUnit 5 (org.junit.jupiter.api, org.junit.jupiter.engine and org.junit.jupiter.params - 5.4.0)
 - Hibernate (5.4.4 Final)
-- MySQL (driver 8.0.17)
-- Log4j (1.2.17)
-- Joda Time (2.10.3)
+- H2 (driver 2.1.214)
+- Log4j2 (2.17.2)
 - Coveralls (4.3.0)
-- Jacoco (0.7.9)
-
-## Contributing
-
-[![](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/images/0)](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/links/0)[![](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/images/1)](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/links/1)[![](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/images/2)](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/links/2)[![](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/images/3)](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/links/3)[![](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/images/4)](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/links/4)[![](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/images/5)](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/links/5)[![](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/images/6)](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/links/6)[![](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/images/7)](https://sourcerer.io/fame/mariazevedo88/mariazevedo88/goldgem/links/7)
+- Jacoco (0.8.8)
