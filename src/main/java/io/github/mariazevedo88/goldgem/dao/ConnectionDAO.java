@@ -5,7 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class that implements a connection (session) with a specific database. SQL statements are executed 
@@ -24,7 +25,7 @@ public class ConnectionDAO {
 	private String portNumber;
 	
 	private static final String JDBC = "jdbc:";
-	private static final Logger logger = Logger.getLogger(ConnectionDAO.class);
+	private static final Logger logger = LogManager.getLogger(ConnectionDAO.class);
 	
 	public ConnectionDAO (){
 		super();
@@ -97,17 +98,17 @@ public class ConnectionDAO {
 		Connection newConnection = null;
         try {
         	
-        	if (getDbms().equals("mysql")) {
-				newConnection = DriverManager.getConnection(JDBC + getDbms() + "://" + getServerName() + ":" + getPortNumber() 
+	        switch (getDbms()) {
+	            case "mysql" -> newConnection = DriverManager.getConnection(JDBC + getDbms() + "://" + getServerName() + ":" + getPortNumber() 
 				+ "/" + getDbName() + "?useSSL=false&useTimezone=true&serverTimezone=America/Sao_Paulo", getConnectionProps());
-        	}else if (getDbms().equals("postgreSQL")){
-    	    	newConnection = DriverManager.getConnection(JDBC + getDbms() + "://" + getServerName() + ":" + getPortNumber() 
-    	    	+ "/" + getDbName() + "?useSSL=false&useTimezone=true&serverTimezone=America/Sao_Paulo", getConnectionProps());
-    	    }else if (getDbms().equals("derby")) {
-    	        newConnection = DriverManager.getConnection(JDBC + getDbms() + ":" + getDbName() + ";create=true", getConnectionProps());
-    	    }
+	            case "postgreSQL" -> newConnection = DriverManager.getConnection(JDBC + getDbms() + "://" + getServerName() + ":" + getPortNumber() 
+		    	+ "/" + getDbName() + "?useSSL=false&useTimezone=true&serverTimezone=America/Sao_Paulo", getConnectionProps());
+	            case "derby" -> newConnection = DriverManager.getConnection(JDBC + getDbms() + ":" + getDbName() + ";create=true", getConnectionProps());
+	            default -> newConnection = DriverManager.getConnection(JDBC + getDbms() + ":mem:" + getDbName(), getConnectionProps());
+	        };
+        
         	setConnection(newConnection);
-        	logger.info("Connected to database");
+        	logger.info("Connected to database {}" + getDbName());
 		} catch (SQLException e) {
 			logger.error("Error on database connection: " + e);
 		}

@@ -5,7 +5,8 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -29,7 +30,7 @@ public class GenericDAO<T> implements InterfaceDAO{
 	private Class<T> clazz;
 	private Session session;
 	private Configuration cfg;
-	private static final Logger logger = Logger.getLogger(GenericDAO.class);
+	private static final Logger logger = LogManager.getLogger(GenericDAO.class);
 	
 	/**
 	 * Constructor that receives as parameter a class and instantiates a hibernate session

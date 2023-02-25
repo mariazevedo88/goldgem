@@ -6,7 +6,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.github.mariazevedo88.goldgem.dao.interfaces.InterfaceJDBCDAO;
 import io.github.mariazevedo88.goldgem.dto.GenericDTO;
@@ -23,7 +24,7 @@ public class GenericJDBCDAO implements InterfaceJDBCDAO {
 	
 	private ConnectionDAO connDao;
 	private static final String SELECT_CLAUSE = "select * from ";
-	private static final Logger logger = Logger.getLogger(GenericJDBCDAO.class);
+	private static final Logger logger = LogManager.getLogger(GenericJDBCDAO.class);
 	
 	/**
 	 * Constructor that receives as parameter a class and instantiates a JDBC session

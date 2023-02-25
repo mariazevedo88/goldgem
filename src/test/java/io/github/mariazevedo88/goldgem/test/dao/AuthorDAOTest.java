@@ -6,15 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
 
-import org.apache.log4j.Logger;
-import org.joda.time.DateTime;
-import org.junit.jupiter.api.AfterAll;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -34,7 +33,7 @@ import io.github.mariazevedo88.goldgem.test.Author;
 @TestMethodOrder(OrderAnnotation.class)
 public class AuthorDAOTest{
 	
-	private static final Logger logger = Logger.getLogger(AuthorDAOTest.class);
+	private static final Logger logger = LogManager.getLogger(AuthorDAOTest.class);
 	private GenericDAO<Author> genericDAO;
 	private ConnectionDAO genericJDBCDao;
 	
@@ -42,12 +41,12 @@ public class AuthorDAOTest{
 	public void setUp() {
 		genericDAO = new GenericDAO<Author>(Author.class, "hibernate.cfg.xml");
 		
-		genericJDBCDao = DatabaseConnectionTest.getGenericJDBCDAO();
-		if (genericJDBCDao == null){
-			DatabaseConnectionTest dbConn = new DatabaseConnectionTest();
-			dbConn.connectDatabase();
-			genericJDBCDao = DatabaseConnectionTest.getGenericJDBCDAO();
-		}
+		genericJDBCDao = new ConnectionDAO("root", "");
+		genericJDBCDao.setDbms("h2");
+		genericJDBCDao.setDbName("library");
+		
+		Connection conn = genericJDBCDao.createConnection();
+		genericJDBCDao.setConnection(conn);
 	}
 
 	@Test
@@ -58,7 +57,7 @@ public class AuthorDAOTest{
 		Author author = new Author();
 		author.setFirstName("Joseph");
 		author.setLastName("Hair Jr.");
-		author.setCreatedAt(DateTime.now().toDate());
+		author.setCreatedAt(Date.from(Instant.now()));
 		
 		boolean rs = genericDAO.save(author);
 		String msg = rs == true ? author.getFullName() + " added successfully." : "Already exist " + author.getFullName();
@@ -69,23 +68,15 @@ public class AuthorDAOTest{
 	@DisplayName("Get an author using Hibernate")
 	@Order(2)
 	public void getAuthorUsingHibernate(){
-		
-		Author author = new Author();
-		author.setId(1);
-		
-		GenericDTO authorToFound = genericDAO.getByID(author.getId());
-		assertEquals(author.getId(), authorToFound.getId());
+		GenericDTO authorToFound = genericDAO.getByID(1);
+		assertEquals(1, authorToFound.getId());
 	}
 	
 	@Test
 	@DisplayName("Delete an author using Hibernate")
 	@Order(3)
 	public void deleteAuthorUsingHibernate(){
-		
-		Author author = new Author();
-		author.setId(1);
-		
-		GenericDTO authorToFound = genericDAO.getByID(author.getId());
+		GenericDTO authorToFound = genericDAO.getByID(1);
 		boolean isDeleted = genericDAO.delete(authorToFound);
 		assertTrue(isDeleted);
 	}
@@ -96,17 +87,14 @@ public class AuthorDAOTest{
 	public void addAuthorUsingJDBC() throws ParseException{
 		
 		try {
-			Statement stmt = genericJDBCDao.getConnection().createStatement();
+		    String sql = "insert into author (id, first_name, last_name, created_at) values (?,?,?,?)";
+			PreparedStatement stmt = genericJDBCDao.getConnection().prepareStatement(sql);
+			stmt.setInt(1, 1);
+			stmt.setString(2, "Clifford");
+			stmt.setString(3, "Stein");
+			stmt.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
 			
-			//Get next available id
-			int nextID = getSequenceNextVal(genericJDBCDao.getConnection());
-			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date dateStr = formatter.parse(DateTime.now().toString());
-			Date sqlDate = new Date(dateStr.getTime());
-			
-			String sql = "insert into author (id, first_name, last_name, created_at) values (" + nextID + ", 'Clifford', 'Stein', '" + sqlDate + "')";
-			int rs = stmt.executeUpdate(sql);
+			int rs = stmt.executeUpdate();
 			assertEquals(1, rs, rs + " row have been affected.");
 			
 			stmt.close();
@@ -116,51 +104,21 @@ public class AuthorDAOTest{
 		}
 	}
 	
-	private int getSequenceNextVal(Connection conn) throws SQLException {
-		
-		String sequenceSql = "select * from hibernate_sequence";
-		PreparedStatement ps = conn.prepareStatement(sequenceSql);
-		ResultSet resultSet = ps.executeQuery();
-		int nextID = 1;
-		if(resultSet.next()) {
-			nextID = resultSet.getInt(1);
-		}
-		
-		ps.close();
-		
-		return nextID;
-	}
-	
 	@Test
 	@DisplayName("Remove an author using JDBC")
 	@Order(5)
 	public void deleteAuthorUsingJDBC(){
 		
 		try {
-			Statement stmt = genericJDBCDao.getConnection().createStatement();
-			
-			String sql = "delete from author where first_name like 'Clifford'";
-			int rs = stmt.executeUpdate(sql);
-			assertEquals(1, rs, rs + " row have been affected.");
+			PreparedStatement stmt = genericJDBCDao.getConnection().prepareStatement("delete from author where id=?");
+			stmt.setInt(1, 1);
+			int rs = stmt.executeUpdate();
+			assertEquals(1, rs);
 			
 			stmt.close();
 			
 		} catch (SQLException e) {
 			logger.error("Error delete author." + e);
-		}
-	}
-	
-	@AfterAll
-	public void tearDown() {
-		try {
-			Statement stmt = genericJDBCDao.getConnection().createStatement();
-			
-			String sql = "update hibernate_sequence SET next_val = 1";
-			stmt.executeUpdate(sql);
-			stmt.close();
-			
-		} catch (SQLException e) {
-			logger.error("Error update hibernate_sequence." + e);
 		}
 	}
 
