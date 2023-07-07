@@ -28,7 +28,7 @@
         <java.version>17</java.version>
         <hibernate.version>5.6.15.Final</hibernate.version>
         <log4j2.version>2.20.0</log4j2.version>
-        <h2.version>2.1.214</h2.version>
+        <h2.version>2.2.220</h2.version>
         <junit.jupiter.version>5.4.0</junit.jupiter.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <surefire.plugin.version>2.22.0</surefire.plugin.version>
